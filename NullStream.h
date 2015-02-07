@@ -1,12 +1,10 @@
-#ifndef TapStream_h
-#define TapStream_h
+#ifndef NullStream_h
+#define NullStream_h
 
 #include "Arduino.h"
 
-class TapStream : public Stream {
+class NullStream : public Stream {
   public:
-    TapStream(Stream &_source, Stream &_writes, Stream &_reads);
-
     int available();
     int peek();
     void flush();
@@ -42,10 +40,6 @@ class TapStream : public Stream {
     size_t println(double num, int digits);
     size_t println(const Printable& x);
     
-  private:
-    Stream* source;
-    Stream* writes;
-    Stream* reads;
 };
 
-#endif // TapStream_h
+#endif // NullStream_h
