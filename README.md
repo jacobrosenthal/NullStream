@@ -1,4 +1,4 @@
-#TapStream
+#NullStream
 
 Black holes all data sent to it. Any .reads, .available, .peeks return -1, false, etc.
 
