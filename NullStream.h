@@ -27,7 +27,7 @@ class NullStream : public Stream {
     size_t print(unsigned long n, int base);
     size_t print(double n, int digits);
     size_t println(const __FlashStringHelper *ifsh);
-    size_t print(const Printable& x);
+    size_t print(const Printable &x);
     size_t println(void);
     size_t println(const String &s);
     size_t println(const char c[]);
@@ -38,8 +38,8 @@ class NullStream : public Stream {
     size_t println(long num, int base);
     size_t println(unsigned long num, int base);
     size_t println(double num, int digits);
-    size_t println(const Printable& x);
-    
+    size_t println(const Printable &x);
+
 };
 
 #endif // NullStream_h

@@ -4,7 +4,7 @@ int NullStream::available() {
   return 0;
 }
 
-int NullStream::peek() 
+int NullStream::peek()
 {
   return -1;
 }
@@ -100,7 +100,7 @@ size_t NullStream::println(const __FlashStringHelper *ifsh)
   return n;
 }
 
-size_t NullStream::print(const Printable& x)
+size_t NullStream::print(const Printable &x)
 {
   return x.printTo(*this);
 }
@@ -155,7 +155,7 @@ size_t NullStream::println(double num, int digits)
   return 1;
 }
 
-size_t NullStream::println(const Printable& x)
+size_t NullStream::println(const Printable &x)
 {
   return x.printTo(*this);
 }
