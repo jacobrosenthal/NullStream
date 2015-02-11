@@ -17,14 +17,12 @@ install:
  - npm install -g leo
 
 script:
- - pwd
- - ls
  - leo config set ide.path /usr/local/share/arduino
  - leo new blink
  - mkdir blink/node_modules
  - mkdir blink/node_modules/NullStream
- - cp *.h Blink/node_modules/NullStream/
- - cp *.cpp Blink/node_modules/NullStream/
+ - cp *.h blink/node_modules/NullStream/
+ - cp *.cpp blink/node_modules/NullStream/
  - cd blink
  - printf "\r\n#include <NullStream.h>" >> src/basic.ino
  - leo build -b uno
