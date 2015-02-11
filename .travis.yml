@@ -18,7 +18,7 @@ install:
  - tar -xvf arduino-1.5.8-linux64.tgz
  - sudo mv arduino-1.5.8/ /usr/local/share/arduino
  #leo
- - npm install -g $1
+ - npm install -g leo
  - leo config set ide.path /usr/local/share/arduino
  - chmod u+x initexamples.sh
 
