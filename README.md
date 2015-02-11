@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/jacobrosenthal/NullStream.svg?branch=master)](https://travis-ci.org/jacobrosenthal/NullStream)
 #NullStream
 
 Black holes all data sent to it. Any .reads, .available, .peeks return -1, false, etc.
