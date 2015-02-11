@@ -1,8 +1,7 @@
 language: cpp
-matrix:
-  include:
-      env: BOARD=uno
-      env: BOARD=yun
+env:
+- BOARD=uno
+- BOARD=yun
 compiler:
  - gcc
 
