@@ -1,30 +1,23 @@
 #include "NullStream.h"
 
-int NullStream::available()
-{
+int NullStream::available() {
   return 0;
 }
 
-int NullStream::peek()
-{
+int NullStream::peek() {
   return -1;
 }
 
-void NullStream::flush()
-{
-}
+void NullStream::flush() {}
 
-int NullStream::read()
-{
+int NullStream::read() {
   return -1;
 }
 
-size_t NullStream::write(uint8_t c)
-{
+size_t NullStream::write(uint8_t c) {
   return 1;
 }
 
-size_t NullStream::write(const uint8_t *buffer, size_t size)
-{
+size_t NullStream::write(const uint8_t *buffer, size_t size) {
   return size;
 }
