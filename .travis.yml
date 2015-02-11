@@ -17,6 +17,8 @@ install:
  - npm install -g leo
 
 script:
+ - pwd
+ - ls
  - leo config set ide.path /usr/local/share/arduino
  - leo new blink
  - mkdir blink/node_modules
