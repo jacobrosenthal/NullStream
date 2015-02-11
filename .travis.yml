@@ -1,0 +1,25 @@
+language: cpp
+compiler:
+ - gcc
+
+install:
+ # g++4.8
+ - if [ "$CXX" == "g++" ]; then sudo apt-get install -qq g++-4.8; fi
+ - if [ "$CXX" == "g++" ]; then export CXX="g++-4.8"; fi
+ #arduino
+ - wget http://downloads-02.arduino.cc/arduino-1.5.8-linux64.tgz
+ - tar -xvf arduino-1.5.8-linux64.tgz
+ - sudo mv arduino-1.5.8/ /usr/local/share/arduino
+ #leo
+ - npm install -g leo
+
+script:
+ - leo config set ide.path /usr/local/share/arduino
+ - leo new blink
+ - mkdir blink/node_modules
+ - mkdir blink/node_modules/NullStream
+ - cp *.h Blink/node_modules/NullStream/
+ - cp *.cpp Blink/node_modules/NullStream/
+ - cd blink
+ - printf "\r\n#include <NullStream.h>" >> src/basic.ino
+ - leo build -b uno
