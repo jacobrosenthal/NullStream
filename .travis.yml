@@ -18,4 +18,5 @@ install:
 
 script:
  - leo config set ide.path /usr/local/share/arduino
+ - chmod u+x initexamples
  - initexamples
