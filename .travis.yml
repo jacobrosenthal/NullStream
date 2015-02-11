@@ -1,4 +1,8 @@
 language: cpp
+matrix:
+  include:
+      env: BOARD=uno
+      env: BOARD=yun
 compiler:
  - gcc
 
@@ -14,9 +18,9 @@ install:
  - tar -xvf arduino-1.5.8-linux64.tgz
  - sudo mv arduino-1.5.8/ /usr/local/share/arduino
  #leo
- - npm install -g leo
-
-script:
+ - npm install -g $1
  - leo config set ide.path /usr/local/share/arduino
  - chmod u+x initexamples.sh
- - ./initexamples.sh
+
+script:
+ - ./initexamples.sh $BOARD
