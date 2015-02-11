@@ -18,6 +18,6 @@ mkdir $d/src
 cp $d/*.ino $d/src
 ln -s $PWD $d/node_modules/
 pushd $d
-leo build -b uno
+leo build -b $1
 popd
 done
