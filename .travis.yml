@@ -1,25 +1,45 @@
+# Test your arduino libraries with travis and the official arduino tool chain
+
+# assumes directory structure
+# /NullStream
+#   NullStream.h
+#   NullStream.cpp
+#   examples
+#     NullStreamExample
+#       NullStreamExample.ino
+
 language: cpp
 env:
-- BOARD=uno
-- BOARD=yun
+ # We'll test against only a single library example, and only for uno, but you could add more combinations
+ # https://github.com/arduino/Arduino/blob/master/build/shared/manpage.adoc
+ - BOARD=arduino:avr:uno NAME=NullStreamExample
+#  - BOARD=attiny:avr:attiny85 NAME=$NullStreamExample
+
 compiler:
  - gcc
 
 before_install:
- - if [ "$CXX" == "g++" ]; then sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test; fi
- - sudo apt-get update -qq
+ - sudo apt-get update -qq && sudo apt-get install -qq openjdk-6-jre avr-libc gcc-avr xvfb
+
 install:
- # g++4.8
- - if [ "$CXX" == "g++" ]; then sudo apt-get install -qq g++-4.8; fi
- - if [ "$CXX" == "g++" ]; then export CXX="g++-4.8"; fi
- #arduino
- - wget http://downloads-02.arduino.cc/arduino-1.5.8-linux64.tgz
- - tar -xvf arduino-1.5.8-linux64.tgz
- - sudo mv arduino-1.5.8/ /usr/local/share/arduino
- #leo
- - npm install -g leo
- - leo config set ide.path /usr/local/share/arduino
- - chmod u+x initexamples.sh
+ # arduino
+ - wget http://downloads-02.arduino.cc/arduino-1.6.1-linux64.tar.xz
+ - tar -xvf arduino-1.6.1-linux64.tar.xz
+ - sudo mv arduino-1.6.1/ /usr/local/share/arduino
+
+ # you could add attiny the extra attiny board package
+# - wget https://github.com/damellis/attiny/archive/ide-1.6.x.zip
+# - unzip ide-1.6.x.zip
+# - sudo mv attiny-ide-1.6.x/attiny /usr/local/share/arduino/hardware/
+
+before_script:
+ # arduino requires an X server even with command line
+ # https://github.com/arduino/Arduino/issues/1981
+ - Xvfb :1 -screen 0 1024x768x16 &> xvfb.log &
+ # put your source files in a folder under a new libraries folder
+ - sudo mkdir /usr/src/arduino
+ - sudo mkdir /usr/src/arduino/libraries
+ - sudo ln -s $TRAVIS_BUILD_DIR /usr/src/arduino/libraries/something
 
 script:
- - ./initexamples.sh $BOARD
+ - sudo DISPLAY=:1.0 /usr/local/share/arduino/arduino --board $BOARD --pref sketchbook.path=/usr/src/arduino --verify /usr/src/arduino/libraries/something/examples/$NAME/$NAME.ino
